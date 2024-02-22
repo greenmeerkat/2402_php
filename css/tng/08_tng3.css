@@ -38,7 +38,7 @@
 
 /* float 이용 */
 .header, .container, .footer {
-    width: 700px;
+    width: 730px;
     margin: 10px auto;
 }
 .section {
@@ -50,6 +50,7 @@
     float: left;
 }
 .footer {
+    clear: left;
     background-color: #000;
     height: 50px;
     color: #fff;
