@@ -55,6 +55,48 @@ TITLE.classList.add('font-color-red', 'css2', 'css3', 'css4'); // 여러개 추�
 TITLE.classList.remove('font-color-red');
 
 // classList.toggle() : 해당 클래스를 토글
-
+TITLE.classList.toggle('font-color-red');
 
 // 리스트의 요소들의 글자색을 짝수는 빨강, 홀수는 파랑으로 수정
+const items = document.querySelectorAll('#ul > li');
+items.forEach((item, key) => (item.style.color = key % 2 === 0 ? 'red' : 'blue'));
+
+
+// ------------
+// 새로운 요소 생성
+// ------------
+// createElement(태그명) : 새로운 요소 생성
+const NEW_LI = document.createElement('li');
+NEW_LI.innerHTML = '광산게임';
+
+const TARGET = document.querySelector('#ul'); // 삽입할 부모요소 선택
+
+// appendChild(노드) : 해당 부모 노드에 마지막 자식으로 노드 추가
+TARGET.appendChild(NEW_LI);
+
+// 동일한 형태의 요소를 여러개 추가하는 방법
+// for(let i = 0; i < 3; i++) {
+//     const NEW_LI = document.createElement('li');
+//     NEW_LI.innerHTML = '광산게임';
+//     const TARGET = document.querySelector('#ul'); // 삽입할 부모요소 선택
+//     // appendChild(노드) : 해당 부모 노드에 마지막 자식으로 노드 추가
+//     TARGET.appendChild(NEW_LI);
+// }
+
+// insertBefore(새로운노드, 기준노드) : 해당 부모 노드의 자식인 기준노드 앞에 새로운 노드 추가
+const NEW_LI2 = document.createElement('li');
+NEW_LI2.innerHTML = '굴착소년쿵야';
+
+const hyeunSoo = document.querySelector('#ul > li:nth-child(3)');
+
+TARGET.insertBefore(NEW_LI2, hyeunSoo);
+
+// 프리셀을 스페이스와 사과게임 사이에 넣기
+const NEW_LI3 = document.createElement('li');
+NEW_LI3.innerHTML = '프리셀';
+const APPLE = document.querySelector('#apple');
+TARGET.insertBefore(NEW_LI3, APPLE);
+
+// removeChild(노드) : 해당 부모 노드의 자식을 삭제
+TARGET.removeChild(NEW_LI3);
+
