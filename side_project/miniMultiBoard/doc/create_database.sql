@@ -49,5 +49,20 @@ VALUES('0', '자유게시판')
 INSERT INTO users(u_email, u_pw, u_name)
 VALUES('admin@admin.com', 'qwer1234!', '관리자');
 
+-- 테스트용 게시글 추가
+INSERT INTO boards(u_id, b_type, b_title, b_content, b_img)
+VALUES('1', '0', '자유1', '자유내용1', '/view/img/cat1.png')
+,('1', '0', '자유2', '자유내용2', '/view/img/cat2.png')
+,('1', '0', '자유3', '자유내용3', '/view/img/cat3.png')
+,('1', '1', '질문1', '질문내용1', '/view/img/cat4.png')
+,('1', '1', '질문2', '질문내용2', '/view/img/cat5.png');
+
+
+
+
+
+
+
+
 
 
