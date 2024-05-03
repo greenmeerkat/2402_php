@@ -15,7 +15,6 @@ class Controller {
 
     // 생성자
     public function __construct($action) {
-
         // 세션 시작
         if(!isset($_SESSION)) {
             session_start();
