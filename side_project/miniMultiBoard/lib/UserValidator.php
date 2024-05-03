@@ -6,9 +6,9 @@ class UserValidator {
         $arrErrorMsg = []; // 에러 메세지 보관용
         
         // 패턴 생성
-        $patternEmail = "/^[0-9a-zA-Z](?!.*?[\-\_\.]{2})[a-zA-Z0-9\-\_\.]{3,63}@[0-9a-zA-Z](?!.*?[\-\_\.]{2})[a-zA-Z0-9\-\_\.]{3,63}\.[a-zA-Z]{2,3}$/";
-        $patternPassword = "/^[a-zA-Z0-9!@]{8,20}$/";
-        $patternName = "/^[가-힣]{1,50}$/";
+        $patternEmail = "/^[0-9a-zA-Z](?!.*?[\-\_\.]{2})[a-zA-Z0-9\-\_\.]{3,63}@[0-9a-zA-Z](?!.*?[\-\_\.]{2})[a-zA-Z0-9\-\_\.]{3,63}\.[a-zA-Z]{2,3}$/u";
+        $patternPassword = "/^[a-zA-Z0-9!@]{8,20}$/u";
+        $patternName = "/^[가-힣]{1,50}$/u";
 
         // 이메일 체크
         if(array_key_exists("u_email", $param_arr)) {
