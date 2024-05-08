@@ -47,7 +47,7 @@ class BoardController extends Controller {
     }
 
     // 게시글 작성
-    public function addPost() {
+    protected function addPost() {
         // 이미지 파일 처리
         $path = "";
         if(!empty($_FILES["img"]["name"])) {
@@ -76,7 +76,7 @@ class BoardController extends Controller {
     }
 
     // 상세 정보 조회
-    public function detailGet() {
+    protected function detailGet() {
         $requestData = [
             "b_id" => $_GET["b_id"]
         ];
@@ -98,4 +98,39 @@ class BoardController extends Controller {
         exit;
     }
 
+    // 삭제 처리
+    protected function deletePost() {
+        $requestData = [
+            "b_id" => $_POST["b_id"]
+            ,"u_id" => $_SESSION["u_id"]
+        ];
+
+        // response 데이터 초기화
+        $arrResponse = [
+            "errorFlg" => false
+            ,"errorMsg" => ""
+            ,"b_id" => 0
+        ];
+
+        // 삭제 처리
+        $modelBoards = new BoardsModel();
+        $modelBoards->beginTransaction();
+        $resultDelete = $modelBoards->deleteBoard($requestData);
+
+        if($resultDelete !== 1) {
+            // 예외처리
+            $arrResponse["errorFlg"] = true;
+            $arrResponse["errorMsg"] = "삭제 처리 이상";
+            $modelBoards->rollBack();
+        } else {
+            // 정상처리
+            $arrResponse["b_id"] = $requestData["b_id"];
+            $modelBoards->commit();
+        }
+
+        // response 처리
+        header("Content-type: application/json");
+        echo json_encode($arrResponse);
+        exit;
+    }
 }
