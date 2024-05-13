@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class BoardName extends Model
 {
     use HasFactory;
+
 }
