@@ -10,15 +10,27 @@
   </div> -->
 
   <!-- 상품 리스트 -->
-  <div>
+  <BoardList
+    :products="products"
+    @myOpenModal="myOpenModal"
+  >
+    <!-- slot : 자식쪽에서 <slot></slot> 부분에 전달하여 자식컴포넌트에서 렌더링 -->
+    <h3>부모쪽에서 정의한 슬롯</h3>
+  </BoardList>
+  <!-- <div>
     <div v-for="item in products" :key="item.productName">
       <h4 @click="myOpenModal(item)">{{ item.productName }}</h4>
       <p>{{ item.price }} 원</p>
     </div>
-  </div>
+  </div> -->
 
   <!-- 모달 -->
-  <div class="bg_black" v-if="flgModal">
+  <ModalDetail
+    :flgModal="flgModal"
+    :product="product"
+    @myCloseModal="myCloseModal"
+  />
+  <!-- <div class="bg_black" v-if="flgModal">
     <div class="bg_white">
       <img :src="product.img">
       <h4>{{ product.productName }}</h4>
@@ -26,12 +38,14 @@
       <p>{{ product.price }} 원</p>
       <button @click="flgModal = !flgModal">닫기</button>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { provide, reactive, ref } from 'vue';
 import HeaderComponent from './components/HeaderComponent.vue'; // 자식 컴포넌트 import
+import ModalDetail from './components/ModalDetail.vue';
+import BoardList from './components/BoardList.vue';
 
 // --------------
 // 데이터 바인딩
@@ -58,10 +72,29 @@ const navList = reactive([
 // ref : 타입제한 없이 사용가능하나 일반적으로 string, number, boolean 과 같은 기본유형에 대한 반응적 참조를 위해 사용
 const flgModal = ref(false); // 모달 표시용 플래그
 let product = reactive({});
+
 function myOpenModal(item) {
-  flgModal.value = !flgModal.value;
+  flgModal.value = true;
   product = item;
 }
+function myCloseModal(str) {
+  flgModal.value = false;
+  console.log(str); // 파라미터 연습용
+}
+
+// ---------------------
+// Provide / Inject 연습
+// ---------------------
+const count = ref(0);
+
+function addCount() {
+  count.value++;
+}
+
+provide('test', {
+  count
+  ,addCount
+});
 </script>
 
 <style>
