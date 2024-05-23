@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use PDOException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -58,6 +59,8 @@ class Handler extends ExceptionHandler
             $errorMsgList = $exception->context();
         } else if($exception instanceof PDOException) {
             $errorCode = 'E80';
+        } else if ($exception instanceof NotFoundHttpException) {
+            $errorCode = 'E90';
         }
 
         // Response Data 생성
